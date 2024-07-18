@@ -1,0 +1,59 @@
+.main{
+ background: linear-gradient(rgba(136, 180, 78, .1), rgba(136, 180, 78, .1)), url(../img/product-bg.png) left bottom no-repeat;
+ background-size: auto;
+ justify-content:center;
+ align-item:center;
+ height:100vh;
+}
+.main-div{
+justify-content:center;
+align-item:center;
+display:flex;
+padding:30px;
+padding-top:80px;
+}
+
+.msg_div{
+justify-content:center;
+align-item:center;
+display:flex;
+padding:50px;
+list-style-type: none;
+color:red;
+}
+
+.form-control {
+    color: black;
+}
+
+.form-control:focus {
+    outline: none !important;
+    border:1px solid white;
+    box-shadow: 0 0 8px #88B44E;;
+  }
+
+ .form-control::placeholder{
+  color: lightgray;
+  opacity: 0.8;
+}
+
+.reg_form{
+margin-top:50px;
+width:500px;
+margin-bottom:70px;
+}
+
+.form-label {
+color:gray;
+}
+
+#user_home{
+margin-top:400px;
+}
+.form-control:read-only {
+    background-color: #ffffff;
+    opacity: 1;
+}
+
+select:selected{
+color:grey;}

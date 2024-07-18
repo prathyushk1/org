@@ -1,0 +1,44 @@
+{% extends 'admin/admin_nav.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load static %}
+<head>
+    <link href="{% static 'css/style1.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+<section class="main">
+    <div class="main-div">
+        <table border="1" class="table table-striped">
+            <tr>
+                <th>Register Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>State</th>
+                <th>District</th>
+                <th>City</th>
+                <th>Email</th>
+                <th>Operation</th>
+            </tr>
+
+            {% for i in page_obj %}
+            <tr>
+                <td>{{i.reg_id}}</td>
+                <td>{{i.firstname}}</td>
+                <td>{{i.lastname}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.state}}</td>
+                <td>{{i.district}}</td>
+                <td>{{i.city}}</td>
+                <td>{{i.email}}</td>
+                <td><a class="btn btn-danger" href="{% url 'delete_customer' login_id i.reg_id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <center>{% include "pagination.html" %}</center>
+</section>
+{% endblock content %}

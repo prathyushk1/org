@@ -1,0 +1,90 @@
+{% extends 'customers/customer_nav.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load static %}
+<head>
+    <link href="{% static 'css/style1.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+
+<section class="main">
+    {% if messages %}
+    <center>
+        <div class="col-xs-12" style="padding:10px;">
+
+            <ul class="messages">
+                {% for message in messages %}
+                <div class="alert alert-warning" role="alert" style="width:50%;">
+                    <li style="list-style-type: none;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </center>
+    {% else %}
+        {% csrf_token %}
+    <div class="main-div" style="overflow-y: auto !important; height:400px !important;">
+
+        <table width="100%">
+            {% if count == 1 %}
+            <tr>
+                <td><img alt="" class="img-fluid" height="100px" src="{{ cart_item.product_id.image.url }}"
+                         width="100px"></td>
+                <td>
+                    <div class="p-4"><h4 class="mb-3">{{ cart_item.product_id.name }}</h4></div>
+                </td>
+                <td>
+                    <div class="p-4"><p>{{ cart_item.product_id.price }}</p></div>
+                </td>
+                <td>
+                    <td>
+                    <div class="col-xs-6" style="display:flex;">
+                        <div class="p-4"><a class="btn btn-primary"  href="{% url 'dnc_qty' login_id cart_item.item_id %}">-</a></div>
+                        <div class="p-4"><input type="text" value="{{ cart_item.qty }}" id="qty" style="width:40px; text-align:center;" disabled></div>
+                        <div class="p-4"><a class="btn btn-primary"  href="{% url 'inc_qty' login_id cart_item.item_id %}">+</a></div>
+
+                    </div>
+                </td>
+                </td>
+                <td>
+                    <div class="p-4"><a class="btn btn-danger" href="{% url 'remove_cart_item' login_id cart_item.item_id  cart_item.carts_id  %}">Remove</a>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            {% for i in cart_item %}
+            <tr>
+                <td><img alt="" class="img-fluid" height="100px" src="{{ i.product_id.image.url }}"
+                         width="100px"></td>
+                <td>
+                    <div class="p-4"><h4 class="mb-3">{{ i.product_id.name }}</h4></div>
+                </td>
+                <td>
+                    <div class="p-4"><p>₹{{ i.product_id.price }}</p></div>
+                </td>
+                <td>
+                    <div class="col-xs-6" style="display:flex;">
+                        <div class="p-4"><a class="btn btn-primary"  href="{% url 'dnc_qty' login_id i.item_id %}">-</a></div>
+                        <div class="p-4"><input type="text" value="{{ i.qty }}" id="qty" style="width:40px; text-align:center;" disabled></div>
+                        <div class="p-4"><a class="btn btn-primary"  href="{% url 'inc_qty' login_id i.item_id %}">+</a></div>
+
+                    </div>
+                </td>
+                <td>
+                    <div class="p-4"><a class="btn btn-danger" href="{% url 'remove_cart_item' login_id i.item_id i.carts_id %}">Remove</a>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            {% endfor %}
+            {% endif %}
+        </table>
+
+    </div>
+        <center><a class="btn btn-outline-success mx-auto d-grid gap-2 col-6" href="{% url 'place_order' login_id cart_id %}" >Place Order</a></center>
+    {% endif %}
+</section>
+{% endblock content %}
